@@ -1,0 +1,111 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String    @id @default(uuid())
+  name         String
+  email        String    @unique
+  password     String
+  driver_license String
+  address      String
+  created_at   String
+  admin        String
+  rentals     Rental[]
+
+  @@map("users")
+}
+
+model Category {
+  id         String    @id @default(uuid())
+  name       String  @unique
+  description String
+  created_at String
+
+  cars     Car[]
+
+  @@map("categories")
+}
+
+model Car {
+  id         String    @id @default(uuid())
+  name       String
+  description String
+  available Boolean
+  license_plate String
+  fine_amount Decimal
+  brand String
+  create_at String
+  category_id String
+  category   Category  @relation(fields: [category_id], references: [id])
+  specification Specification[]
+  car_specifications SpecificationCar[]
+  rental Rental[]
+  car_image Car_Image[]
+
+  @@map("cars")
+}
+
+model Specification {
+  id           String    @id @default(uuid())
+  name String            @unique
+  description String
+
+
+  car_id       String
+  car          Car       @relation(fields: [car_id], references: [id])
+  car_specifications SpecificationCar[]
+
+  @@map("specifications")
+}
+
+model SpecificationCar {
+  id          String    @id @default(uuid())
+  car_id       String
+  created_at String
+
+  car          Car       @relation(fields: [car_id], references: [id])
+  specification_id String
+  specification Specification @relation(fields: [specification_id], references: [id])
+
+  @@map("specification_cars")
+}
+
+model Rental {
+  id         String    @id @default(uuid())
+  start_date String
+  end_date String
+  update_date String
+  total_price Decimal
+
+
+  car_id       String
+  car          Car       @relation(fields: [car_id], references: [id])
+  user_id     String
+  user          User       @relation(fields: [user_id], references: [id])
+  created_at String
+
+  @@map("rentals")
+}
+
+model Car_Image {
+  id          String    @id @default(uuid())
+  car_id       String
+  created_at String
+
+  car          Car       @relation(fields: [car_id], references: [id])
+  image_url    String
+
+  @@map("car_images")
+}
