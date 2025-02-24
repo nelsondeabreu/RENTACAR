@@ -16,12 +16,9 @@ class CreateUserUserCase {
 
     async execute({name , email , address , admin ,driver_license ,password}: IRequest) {
         try {
-            const isValidDriverLicense = (driver_license: string | undefined | null): boolean => {
-                const regex = /^ANG-\d{7}$/;
-                return regex.test(driver_license); 
-            };
             
-            if (!isValidDriverLicense(driver_license)) {throw new Error("Invalid Lincense.")}
+            
+            if (!this.userRepository.isValidDriverLicense(driver_license)) {throw new Error("Invalid Lincense.")}
 
             const driver_licenseExists = await this.userRepository.getUserByDriverLicense(driver_license)
             if (driver_licenseExists) { throw new Error("Driver License already exists.") }

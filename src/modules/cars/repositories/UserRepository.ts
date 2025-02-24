@@ -47,6 +47,10 @@ class UserRepository implements IUserRepository {
         return await this.prisma.user.findUnique({ where: { driver_license } });
     }
 
+    isValidDriverLicense = (driver_license: string | undefined | null): boolean => {
+        const regex = /^ANG-\d{7}$/;
+        return regex.test(driver_license); 
+    };
 }
 
 export { UserRepository };
