@@ -43,6 +43,9 @@ class UserRepository implements IUserRepository {
         return await this.prisma.user.findMany();
     }
     
+    async getUserByDriverLicense(driver_license: string): Promise<User> {
+        return await this.prisma.user.findUnique({ where: { driver_license } });
+    }
 
 }
 

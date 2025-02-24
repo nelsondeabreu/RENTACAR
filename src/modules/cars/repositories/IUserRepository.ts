@@ -16,6 +16,7 @@ interface IUserRepository {
     delete(email: string): Promise<void>
     findById(id: string): Promise<User>
     allUsers(): Promise<User[]>
+    getUserByDriverLicense(driver_license: string): Promise<User>
     /* update(email: string, data: Partial<User>): Promise<User>
     verifyEmail(email: string): Promise<User>
     verifyDriverLicense(driver_license: string): Promise<User>
@@ -24,7 +25,6 @@ interface IUserRepository {
     forgotPassword(email: string): Promise<User>
     resetPassword(token: string, password: string): Promise<User>
     getUserByEmail(email: string): Promise<User>
-    getUserByDriverLicense(driver_license: string): Promise<User>
     updateProfile(email: string, data: Partial<User>): Promise<User> */
 }
 

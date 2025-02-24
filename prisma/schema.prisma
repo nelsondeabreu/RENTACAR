@@ -18,7 +18,7 @@ model User {
   name         String
   email        String    @unique
   password     String
-  driver_license String
+  driver_license String  @unique
   address      String
   created_at   String
   admin        String
@@ -43,7 +43,7 @@ model Car {
   name       String
   description String
   available Boolean
-  license_plate String
+  license_plate String  @unique
   fine_amount Decimal
   brand String
   create_at String
@@ -72,7 +72,7 @@ model Specification {
 
 model SpecificationCar {
   id          String    @id @default(uuid())
-  car_id       String
+  car_id       String   @unique
   created_at String
 
   car          Car       @relation(fields: [car_id], references: [id])
@@ -101,7 +101,7 @@ model Rental {
 
 model Car_Image {
   id          String    @id @default(uuid())
-  car_id       String
+  car_id       String   @unique
   created_at String
 
   car          Car       @relation(fields: [car_id], references: [id])
