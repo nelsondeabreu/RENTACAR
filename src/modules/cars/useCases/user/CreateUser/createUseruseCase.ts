@@ -9,7 +9,7 @@ interface IRequest{
     admin:        string
 }
 
-class CreateUserUserCase {
+class CreateUserUseCase {
     constructor(private userRepository: UserRepository) {
         
     }
@@ -19,7 +19,8 @@ class CreateUserUserCase {
             const isValidEmail = await this.userRepository.isValidEmail(email)
             if(!isValidEmail) { throw new Error("Invalid Email.") }
             
-            if (!this.userRepository.isValidDriverLicense(driver_license)) {throw new Error("Invalid Lincense.")}
+            if (!this.userRepository.isValidDriverLicense(driver_license)) 
+            {throw new Error("Invalid Lincense.")}
 
             const driver_licenseExists = await this.userRepository.getUserByDriverLicense(driver_license)
             if (driver_licenseExists) { throw new Error("Driver License already exists.") }
@@ -27,10 +28,12 @@ class CreateUserUserCase {
             const userAlreadyExists = await this.userRepository.findByEmail(email);
             if (userAlreadyExists) { throw new Error("User already exists.") }
             
+            if(!password) throw new Error("Missing Password.")
             return await this.userRepository.create({
                 name, email, password, address, 
                 admin, driver_license , created_at: new Date().toLocaleDateString()
             });
+
 
         } catch (error) {
             throw error
@@ -40,4 +43,4 @@ class CreateUserUserCase {
     }
 }
 
-export { CreateUserUserCase };
+export { CreateUserUseCase };

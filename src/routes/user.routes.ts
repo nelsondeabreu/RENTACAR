@@ -1,5 +1,5 @@
 import { Router , Request , Response } from "express";
-import { createUserController } from "../modules/cars/useCases/user/CreateUser";
+import { createUserController } from "../modules/cars/useCases/user/createUser";
 import { listUsersController } from "../modules/cars/useCases/user/listUsers";
 
 const RoutesUser = Router()

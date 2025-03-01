@@ -1,10 +1,10 @@
 import { UserRepository } from "../../../repositories/UserRepository";
-import { CreateUserUserCase } from "./createUseruseCase";
+import { CreateUserUseCase } from "./createUserUseCase";
 import { CreateUserController } from "./createUserController";
 
 const userRepository = new UserRepository()
 
-const createUserUseCase = new CreateUserUserCase(userRepository)
+const createUserUseCase = new CreateUserUseCase(userRepository)
 
 const createUserController = new CreateUserController(createUserUseCase)
 
