@@ -51,6 +51,11 @@ class UserRepository implements IUserRepository {
         const regex = /^ANG-\d{7}$/;
         return regex.test(driver_license); 
     };
+
+    isValidEmail(email) {
+        const regex = /^[a-z][a-z\d]+\@gmail.com$/; 
+        return regex.test(email)
+    }
 }
 
 export { UserRepository };

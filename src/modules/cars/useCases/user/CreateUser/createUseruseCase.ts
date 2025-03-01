@@ -16,7 +16,8 @@ class CreateUserUserCase {
 
     async execute({name , email , address , admin ,driver_license ,password}: IRequest) {
         try {
-            
+            const isValidEmail = await this.userRepository.isValidEmail(email)
+            if(!isValidEmail) { throw new Error("Invalid Email.") }
             
             if (!this.userRepository.isValidDriverLicense(driver_license)) {throw new Error("Invalid Lincense.")}
 
