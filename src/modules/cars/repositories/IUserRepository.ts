@@ -17,8 +17,8 @@ interface IUserRepository {
     findById(id: string): Promise<User>
     allUsers(): Promise<User[]>
     getUserByDriverLicense(driver_license: string): Promise<User>
-    /* update(email: string, data: Partial<User>): Promise<User>
-    verifyEmail(email: string): Promise<User>
+    update(id: string, data: Partial<User>): Promise<User>
+    /*verifyEmail(email: string): Promise<User>
     verifyDriverLicense(driver_license: string): Promise<User>
     login(email: string, password: string): Promise<User>
     changePassword(email: string, password: string): Promise<User>
