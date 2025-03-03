@@ -24,7 +24,9 @@ class UpdateUserUseCase {
                 if (!name || !driver_license || !address || !admin) {
                     throw new Error("Invalid update , preenchimento obrigatorio de todos os campos.");
                 }
-
+                const isValidDriverLicense = await this.userRepository.isValidDriverLicense(driver_license)
+                if (isValidDriverLicense) { throw new Error("Invalid Driver License."); }
+                
                 const user = await this.userRepository.update(id , data);
                 
                 const {password,...dadosVisiveis} = user;
