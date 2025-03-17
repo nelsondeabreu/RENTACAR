@@ -38,6 +38,14 @@ model Category {
   @@map("categories")
 }
 
+model Brand {
+  id    String @id @default(uuid())
+  name  String  @unique                       
+  cars  Car[]
+  
+  @@map("brands")                                 
+}
+
 model Car {
   id         String    @id @default(uuid())
   name       String
@@ -45,10 +53,11 @@ model Car {
   available Boolean
   license_plate String  @unique
   fine_amount Decimal
-  brand String
   create_at String
   category_id String
+  brand_id String
   category   Category  @relation(fields: [category_id], references: [id])
+  brand      Brand     @relation(fields: [brand_id], references: [id])
   specification Specification[]
   car_specifications SpecificationCar[]
   rental Rental[]
