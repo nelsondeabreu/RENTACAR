@@ -8,7 +8,7 @@ class ListUsersUseCase {
     async execute(){
         try{
             const allUsers = await this.userReposiroy.allUsers();
-            if(!allUsers) throw new Error("Any user found.");
+            if(allUsers.length === 0) throw new Error("Any user found.");
 
             return allUsers;
             

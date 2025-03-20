@@ -14,6 +14,7 @@ interface IUserRepositoryDTO{
 interface IUserRepository {
     create({name,email,address,admin,created_at,driver_license,password }: IUserRepositoryDTO): Promise<User>
     delete(email: string): Promise<void>
+    deleteAllUsers(): Promise<void>
     findById(id: string): Promise<User>
     allUsers(): Promise<User[]>
     getUserByDriverLicense(driver_license: string): Promise<User>

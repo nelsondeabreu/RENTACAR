@@ -1,12 +1,12 @@
 import { UserRepository } from "../../../repositories/UserRepository";
 
 interface IRequest{
-    name: string,
-    email: string,
-    password: string,
+    name:           string,
+    email:          string,
+    password:       string,
     driver_license: string,
-    address:      string,
-    admin:        string
+    address:        string,
+    admin:          string
 }
 
 class CreateUserUseCase {
@@ -16,7 +16,7 @@ class CreateUserUseCase {
 
     async execute({name , email , address , admin ,driver_license ,password}: IRequest) {
         try {
-            const isValidEmail = await this.userRepository.isValidEmail(email)
+            const isValidEmail = this.userRepository.isValidEmail(email)
             if(!isValidEmail) { throw new Error("Invalid Email.") }
             
             if (!this.userRepository.isValidDriverLicense(driver_license)) 

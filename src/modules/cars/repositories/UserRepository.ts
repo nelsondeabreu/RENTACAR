@@ -36,6 +36,9 @@ class UserRepository implements IUserRepository {
     async delete(email: string): Promise<void> {
         await this.prisma.user.delete({ where: { email } });
     }
+    async deleteAllUsers(): Promise<void> {
+        await this.prisma.user.deleteMany()
+    }
     async findById(id: string): Promise<User | null> {
         return await this.prisma.user.findUnique({ where: { id } });
     }
@@ -47,8 +50,10 @@ class UserRepository implements IUserRepository {
         return await this.prisma.user.findUnique({ where: { driver_license } });
     }
 
-    isValidDriverLicense = (driver_license: string | undefined | null): boolean => {
+    isValidDriverLicense = (driver_license: string ): boolean => {
+        if (typeof driver_license !== "string") { return false }
         const regex = /^ANG-\d{7}$/;
+        driver_license = driver_license.trim();
         return regex.test(driver_license); 
     };
 
