@@ -1,21 +1,22 @@
 import { EmailVerification , PrismaClient } from "@prisma/client";
-import { IEmailVerification } from "./IemailVerificarion";
+import { IUserEmail } from "./IUserEmail";
 
 
 
-class EmailVerificationRepository implements IEmailVerification {
+class EmailVerificationRepository implements IUserEmail {
     private prismaCliente = new PrismaClient
     constructor( ) {}
 
-    async createEmailVerification(email: string, code: string): Promise<void> {
+    async sendCodeVerification(email: string, code: string): Promise<void> {
         await this.prismaCliente.emailVerification.create({data: {email , code},})
     }
-    async getEmailVerification(email: string): Promise<EmailVerification> {
+    async getCodeVerification(email: string): Promise<EmailVerification> {
         return await this.prismaCliente.emailVerification.findUnique({ where: { email } })
     }
-    async deleteEmailVerification(email: string): Promise<void> {
+    async deleteCodeVerification(email: string): Promise<void> {
         await this.prismaCliente.emailVerification.delete( {where: {email} } )
     }
+
 }
 
 export {EmailVerificationRepository}
