@@ -118,3 +118,9 @@ model Car_Image {
 
   @@map("car_images")
 }
+
+model EmailVerification {
+  id        String  @id @default(uuid())
+  email     String  @unique
+  code      String
+}

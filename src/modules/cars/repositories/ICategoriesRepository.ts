@@ -1,4 +1,4 @@
-import { PrismaClient, Category } from "@prisma/client";
+import { Category } from "@prisma/client";
 
 
 interface IcreatedCategoryDTO{
